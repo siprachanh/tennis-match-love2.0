@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&text=Hello');
+
+
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+.nav_link {
+        color: rgb(39, 138, 138);
+        font-size: .9cm;
+}
+
+
