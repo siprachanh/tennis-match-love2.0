@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { useHistory } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { useHistory, Link } from "react-router-dom";
 import "./Invites.css"
 import { useParams } from "react-router-dom"
 
@@ -47,21 +47,69 @@ export const InviteCardEdit = () => {
 <main className="cardEdit--container">
         <fieldset className="inviteCard">
             <h2 className="inviteCard_title">New Match Invite to Team Players</h2>
-            <h3>Name: { invite?.playerId.name }</h3>
            
-            <label for="name">Name:</label>
-            <input type="text" name="name"/>
+           
+            <label htmlFor="Captain name">Name:</label>
+            <input 
+            onChange={ 
+                (evt) => {
+                    const copy = {...invite}
+                    copy.playerId.name = evt.target.value
+                    updateInvite(copy)
+                    
+                }
+            } 
+            required autoFocus
+            type="text" name="name"/>
 
 
-            <section className="invite--day">
+            <div className="invite--day">
                 <p> MatchDay: {invite?.matchDayId}</p>
-            </section>
-            <section className="invite--date">
+
+                <label htmlFor="match day">Day:</label>
+            <input 
+            onChange={ 
+                (evt) => {
+                    const copy = {...invite}
+                    copy.matchDate = evt.target.value
+                    updateInvite(copy)
+                    
+                }
+            } 
+            type="date" id="date"
+
+            required autoFocus
+            type="text" name="name"/>
+
+            </div>
+           
+            <div className="invite--date">
                 <p> MatchDate: {invite?.matchDate}</p>
-            </section>
-            <section className="invite--time">
+            
+            <label htmlFor ="date">Upcoming Match Date: </label>
+            <input type="date" id="match start" name="match-scheduled"
+        
+            
+            
+            onChange={
+                (evt) => {
+                    const copy = {...invite}
+                    copy.matchDate = evt.target.value
+                    updateInvite(copy)
+                }
+            }
+            
+            className="form-control"/>
+            </div>
+
+            <div className="invite--time">
                 <p> MatchTime: {invite?.matchTime}</p>
-            </section>
+            <label for="matchTime"> Our match time is: </label>
+            <input type ="time" id="matchTime" name= "matchTime"
+                min="09:00" max="18:00" required></input>
+            </div>
+
+
             <section className="invite--homeStatus">
                 <p> We play as: {invite?.homeStatusId.name}</p>
             </section>
@@ -83,7 +131,13 @@ export const InviteCardEdit = () => {
             <section className="invite--cardmodifiers">
                 <button id="edit_button" type="button" onClick={() => history.push(`/invites/${invite?.id/editInvite}`)}> Edit</button>
                 <button id="delete_button" type="button" onClick={() => history.push(`/invites/${invite?.id/deleteInvite}`)}> Delete My Invite </button>
+              
              </section>
+             <form name="invite response" method="POST" onsubmit="onSubmit()">
+                 <input type="submit" name="accept" id="accept" value="Accept" onClick="acceptFunction()"></input>
+            
+             <input type="submit" name="reject" id="reject" value="Accept" onclick="rejectFunction()"></input>
+            </form> 
         </fieldset>
         </main>
     );

@@ -12,7 +12,7 @@ export const ApplicationViews = () => {
        < InviteList/>
       </Route>
       <Route path="/invites/create">
-        <InviteCard />
+        <InviteCard/>
       </Route>
       <Route exact path="/captains">
         <CaptainList/>
