@@ -6,7 +6,7 @@ import { Invite } from "./Invite"
 
 
 
-export const InviteCardEdit = ({invite}) => {
+export const CreateInvite = ({invite}) => {
     const history = useHistory();
     const getDate = (date) => {
         return new Date(date).toLocaleDateString();
@@ -38,17 +38,17 @@ export const InviteCardEdit = ({invite}) => {
             <main className="cardEdit--container">
         <fieldset className="inviteCard">
             
-            {/* <input 
-            // onChange={ 
-            //     (evt) => {
-            //         const copy = {...invite}
-            //         copy.playerId.name = evt.target.value
-            //         updateInvite(copy)
+            <input 
+            onChange={ 
+                (evt) => {
+                    const copy = {...invite}
+                    copy.playerId.name = evt.target.value
+                    CreateInvite(copy)
                     
-            //     }
-            // } 
+                }
+            } 
             required autoFocus
-            type="text" name="name"/> */}
+            type="text" name="name"/>
 
 
             <div className="invite--day">
@@ -59,7 +59,7 @@ export const InviteCardEdit = ({invite}) => {
             onChange={ 
                 (evt) => {
                     const copy = {...invite}
-                    copy.matchDay = evt.target.value
+                    copy.matchDate = evt.target.value
                     CreateInvite(copy)
                     
                 }
@@ -78,13 +78,13 @@ export const InviteCardEdit = ({invite}) => {
         
             
             
-            // onChange={
-            //     (evt) => {
-            //         const copy = {...invite}
-            //         copy.matchDate = evt.target.value
-            //         updateInvite(copy)
-            //     }
-            // }
+            onChange={
+                (evt) => {
+                    const copy = {...invite}
+                    copy.matchDate = evt.target.value
+                    CreateInvite(copy)
+                }
+            }
             
             className="form-control"/>
             </div>

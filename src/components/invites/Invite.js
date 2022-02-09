@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./Invites.css";
 import { useHistory } from "react-router-dom";
 
-export const Invites = ({deleteInvite}) => {
+export const Invite = ({deleteInvite}) => {
     const [invite, setInvites] = useState([])
     const currentUserId = parseInt(localStorage.getItem("tennis_player"))
     const history = useHistory()
