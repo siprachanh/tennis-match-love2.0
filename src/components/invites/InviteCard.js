@@ -1,13 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import "./Invites.css"
+import { Invite } from "./Invite"
 
 
 
 
 export const InviteCard = ({invite}) => {
     const history = useHistory();
-    const getReadableDate = (date) => {
+    const getDate = (date) => {
         return new Date(date).toLocaleDateString();
     }
     
@@ -27,47 +28,114 @@ export const InviteCard = ({invite}) => {
         }
     };
     return (
-
+        <>
+        <form className="cardEdit--container">
         <fieldset className="inviteCard">
-            <h2 className="inviteCard_title">New Match Invite to Team Players</h2>
-            <h3>Name: { invite?.playerId.name }</h3>
+            <h3 className="inviteCard_title">Our Upcoming Team Match Schedule</h3>
            
-            <label for="name">Name:</label>
-            <input type="text" name="name"/>
+            <label htmlFor="name">Captain Name:</label>
+             <input type="text" name="name"/> 
+            <main className="cardEdit--container">
+        <fieldset className="inviteCard">
+            
+            {/* <input 
+            // onChange={ 
+            //     (evt) => {
+            //         const copy = {...invite}
+            //         copy.playerId.name = evt.target.value
+            //         updateInvite(copy)
+                    
+            //     }
+            // } 
+            required autoFocus
+            type="text" name="name"/> */}
 
 
-            <section className="invite--day">
-                <p> MatchDay: {invite?.matchDayId}</p>
-            </section>
-            <section className="invite--date">
-                <p> MatchDate: {invite?.matchDate}</p>
-            </section>
-            <section className="invite--time">
-                <p> MatchTime: {invite?.matchTime}</p>
-            </section>
+            <div className="invite--day">
+                
+
+                <label htmlFor="match day">Match Day:</label>
+            <input 
+            // onChange={ 
+            //     (evt) => {
+            //         const copy = {...invite}
+            //         copy.matchDate = evt.target.value
+            //         updateInvite(copy)
+                    
+            //     }
+            // } 
+            type="date" id="date"
+
+            required autoFocus
+            type="text" name="name"/>
+
+            </div>
+           
+            <div className="invite--date">
+            
+            <label htmlFor ="date">Match Date: </label>
+            <input type="date" id="match start" name="match-scheduled"
+        
+            
+            
+            // onChange={
+            //     (evt) => {
+            //         const copy = {...invite}
+            //         copy.matchDate = evt.target.value
+            //         updateInvite(copy)
+            //     }
+            // }
+            
+            className="form-control"/>
+            </div>
+
+            <div className="invite--time">
+           
+            <label htmlFor ="matchTime"> Match Start Time: </label>
+            <input type ="time" id="matchTime" name= "matchTime"
+                min="09:00" max="18:00" required></input>
+            </div>
+
+
             <section className="invite--homeStatus">
-                <p> We play as: {invite?.homeStatusId.name}</p>
+                <label htmlFor  = "match homeStatus">We play as: {invite?.homeStatusId.name}</label>
+                <input type="text" name="name"/> 
             </section>
            
             <section className="invite--courtName">
-                <p> Court Name: {invite?.courtNameId?.name}</p>
-                <p> Court Location: {invite?.courtLocationId.address}</p>
+            <label htmlFor = "courtName">Court Name: {invite?.courtNameId?.name}</label>
+            <input type="text" name="name"/> 
+            </section>
+            <section className="invite--courtLocation">
+            <label htmlFor  = "courtLocation">Court Location: {invite?.courtLocationId.address}</label>
+                <input type="text" name="name"/> 
             </section>
             
             <section className="invite--comment">
-                <p> {invite?.comment}</p>
+            <label htmlFor  = "captain's comments">Captain's Comments: {invite?.comment}</label>
+            <input type="text" name="name"/> 
             </section>
 
             <section className="timestamp">
-                <p>{getReadableDate(invite?.timestamp)}</p>
+            <label htmlFor  ="time match schedule created"> Match Posted on: {Math.floor(Date.now() /1000)} </label>
+           
             
             </section>
         
             <section className="invite--cardmodifiers">
-                <button id="edit_button" type="button" onClick={() => history.push(`/invites/edit/${invite.id}`)}> Edit</button>
+                <button id="edit_button" type="button" onClick={() => history.push(`/invites/${invite?.id/editInvite}`)}> Edit</button>
                 <button id="delete_button" type="button" onClick={() => history.push(`/invites/${invite?.id/deleteInvite}`)}> Delete My Invite </button>
              </section>
+             <form name="invite response" method="POST" onsubmit="onSubmit()">
+                 <input type="submit" name="accept" id="accept" value="Accept" onClick="acceptFunction()"></input>
+            
+             <input type="submit" name="reject" id="reject" value="Decline" onclick="rejectFunction()"></input>
+            </form> 
         </fieldset>
-        
-    );
+    </main>
+    </fieldset>
+    </form>
+    </>
+    )
 }
+
