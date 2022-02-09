@@ -31,9 +31,9 @@ export const CaptainList = () => {
     
     return (
         <>
-            <h2>Captain List</h2>
+            <h3>Captain List</h3>
            
-         {user?.captain ?  <button onClick={() => history.push("/invites/create")}>Create Invite</button> : "" }
+         {user?.captain ?  <button onClick={() => history.push("/invites/create")}>Create Match Invite</button> : "" }
           
             {captains.map((captain) => {
                 return (

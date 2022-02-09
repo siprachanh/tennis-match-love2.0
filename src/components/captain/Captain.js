@@ -16,7 +16,7 @@ export const Captain = () => {
             <section className="player">
                 <h1>Captain {player.captain.Id}</h1>
                 <h3 className="player__name">{player.captain.name}</h3>
-                <div className="player__captain">Player: {player.specialty}</div>
+                <div className="player__captain">Player: {player.captain}</div>
             </section>
         </>
     );

@@ -10,24 +10,19 @@ export const PlayerList = () => {
     }, []);
 
 
-    // const getPlayers = () => {
-    //     return getAllPlayers().then(fetch(`http://localhost:8088/players`) => {
-    //         setPlayers(playersfromAPI)
-    //     });
-    // };
 
     useEffect(() => {
         if(players.length===1) {
             updateMsg("You have 1 player");
         } else{
-            updateMsg(`You have${players.length} players`);
+            updateMsg(`You have ${players.length} players`);
         }
         }, [players]);
 
 
         return (
             <>
-            <h2> Player List </h2>
+            <h3> Player List </h3>
             <div> {totalPlayers}</div>
             {players.map ((player)=> (
                 <p key={`player--${player.id}`}>{player.name}</p>

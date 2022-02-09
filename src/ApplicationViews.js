@@ -5,6 +5,9 @@ import { InviteCard } from "./components/invites/InviteCard";
 import { PlayerList } from "./components/players/PlayerList";
 import { CaptainList } from "./components/captain/CaptainList";
 import { InviteCardEdit } from "./components/invites/InviteCardEdit";
+import { CreateInvite } from "./components/invites/CreateInvite";
+
+
 export const ApplicationViews = () => {
   return (
     <>
@@ -12,7 +15,7 @@ export const ApplicationViews = () => {
        < InviteList/>
       </Route>
       <Route path="/invites/create">
-        <InviteCard/>
+        <CreateInvite/>
       </Route>
       <Route exact path="/captains">
         <CaptainList/>
