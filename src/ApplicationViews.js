@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { InviteList } from "./components/invites/InviteList";
-import { InviteCard } from "./components/invites/InviteCard";
+//import { InviteCard } from "./components/invites/InviteCard";
 import { PlayerList } from "./components/players/PlayerList";
 import { CaptainList } from "./components/captain/CaptainList";
 import { InviteCardEdit } from "./components/invites/InviteCardEdit";

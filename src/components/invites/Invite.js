@@ -6,7 +6,7 @@ export const Invite = ({deleteInvite}) => {
     const [invite, setInvites] = useState([])
     const currentUserId = parseInt(localStorage.getItem("tennis_player"))
     const history = useHistory()
-    const [newinvite, setInvite] = useState({
+    const [newInvite, setInvite] = useState({
         playerId: parseInt(localStorage.getItem("tennis_player")),
         matchDayId: parseInt(localStorage.getItem("tennis_player")),
         matchDate:  "",
@@ -15,7 +15,7 @@ export const Invite = ({deleteInvite}) => {
         courtName: parseInt(localStorage.getItem("tennis_player")),
         courtLocationId: parseInt(localStorage.getItem("tennis_player")),
         comment: "",
-        datePosted: ""
+        timePosted: ""
 
     })
     const date = Date.now()
@@ -31,7 +31,7 @@ export const Invite = ({deleteInvite}) => {
         courtName: parseInt(invite.courtNameId),
         courtLocationId: parseInt(invite.courtLocationId),
         comment: invite.comment,
-        datePosted: date.toLocacalDateString()
+        timePosted: date.toLocaleDateString()
 
         }
     
