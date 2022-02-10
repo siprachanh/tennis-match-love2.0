@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "./Invites.css"
 import { Invite } from "./Invite"
+import { CreateInvite } from "./CreateInvite";
 
 
 

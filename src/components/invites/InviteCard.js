@@ -5,12 +5,6 @@ import { Invite } from "./Invite"
 
 
 
-
-
-
-
-
-
 export const InviteCard = ({invite,currentPlayerId,synchInvites}) => {
     const history = useHistory();
     const getDate = (date) => {
@@ -35,7 +29,7 @@ export const InviteCard = ({invite,currentPlayerId,synchInvites}) => {
     };
     return (
         <>
-        <fieldset className="inviteCard">
+        <fieldset className="inviteCardContent">
             <h3 className="inviteCard_title">Our Upcoming Team Match Schedule</h3>
            
             <section className="invite--captainName">
@@ -61,6 +55,9 @@ export const InviteCard = ({invite,currentPlayerId,synchInvites}) => {
                 <p> {invite?.comment}</p>
             </section>
 
+            <section className="invite--timestamp">
+                <p> {getDate(invite?.timestamp)}</p>
+            </section>
 
           
             
