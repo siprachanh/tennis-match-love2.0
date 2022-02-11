@@ -5,6 +5,9 @@ import { Invite } from "./Invite";
 import { InviteList } from "./InviteList";
 import { InviteCard } from "./InviteCard";
 import { getMatchDays } from "./InviteManager";
+import { getCourtLocations } from "./InviteManager";
+import { getCourtNames } from "./InviteManager";
+import { getAllHomeStatus } from "./InviteManager";
 
 export const CreateInvite = ({ invite }) => {
   const history = useHistory();
@@ -13,21 +16,36 @@ export const CreateInvite = ({ invite }) => {
   const [newInvite, setInvite] = useState({
     playerId: currentPlayerId,
     matchDayId: "Sunday",
-    matchDate: "",
+    matchDate: 0,
     matchTime: "",
-    homeStatusId: "home",
+    homeStatusId: 0,
     courtName: "",
-    courtLocationId: "",
+    courtLocationId: 1,
     comment: "",
-    datetime: ""
-
-
+    datetime: "",
   });
 
   const [weekDays, setWeekDays] = useState([]);
 
   useEffect(() => {
     getMatchDays().then((data) => setWeekDays(data));
+  }, []);
+
+  const [courtLocations, setCourtLocations] = useState([]);
+
+  useEffect(() => {
+    getCourtLocations().then((data) => setCourtLocations(data));
+  }, []);
+
+  const [courtNames, setCourtNames] = useState([]);
+
+  useEffect(() => {
+    getCourtNames().then((data) => setCourtNames(data));
+  }, []);
+  const [courtHome, setCourtHome] = useState([]);
+
+  useEffect(() => {
+    getAllHomeStatus().then((data) => setCourtHome(data));
   }, []);
 
  
@@ -64,17 +82,6 @@ export const CreateInvite = ({ invite }) => {
       }
     );
   };
-
-  // const [courtLocations, selectCourtLocations]= useState([])
-  // const handleCourtLocations = () => {
-  //     fetch(("http://http://localhost:8088/invites?_expand=courtLocationId" )
-  //     .then(data => data.json())
-  //     .then( courtLocations => selectCourtLocations(courtLocations))
-  //     )};
-
-  // useEffect(() => {
-  //     handleCourtLocations();
-  // },[])
 
   return (
     <>
@@ -134,57 +141,87 @@ export const CreateInvite = ({ invite }) => {
               required
             ></input>
           </div>
-
-          <section className="invite--homeStatus">
-            <label htmlFor="match homeStatus">
-              We play as: {invite?.homeStatusId.name}
-            </label>
-            <select name="homeStatus">
-              <option value="home">home</option>
-              <option value="visitor">visitor</option>
-            </select>
-          </section>
-
-          <section className="invite--courtName">
-            <label htmlFor="courtName">
-              Court Name: {invite?.courtName.name}
-            </label>
-            <select name="courtName">
-              <option value="CenPark">Centennial Park Sportsplex</option>
-              <option value="CrocPark">Crocket Park Tennis </option>
-            </select>
-          </section>
-          <section className="invite--courtLocation">
-            <label htmlFor="Court Address">Court Address:</label>
-            <input
+          <div className="invite--homestatus">
+            <label htmlFor="home status">Home or Visitor Status:</label>
+            <select
+              onChange={(evt) => {
+                const copy = { ...newInvite };
+                copy.homeStatusId = evt.target.value;
+                setInvite(copy);
+              }}
+              id="homeStatus"
               required
               autoFocus
-              type="text"
-              id="captain input"
-              className="form-control"
-              placeholder="Input Court Address"
+              name="name"
+            >
+              <option value={0}> We play as: </option>
+              {courtHome.map((homeStatus) => (
+                <option
+                  id={`homeStatus--${homeStatus.id}`}
+                  key={homeStatus.id}
+                  value={homeStatus.id}
+                >
+                  {homeStatus.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="invite--courtName">
+            <label htmlFor="courtName">Court Name:</label>
+            <select
+              onChange={(evt) => {
+                const copy = { ...newInvite };
+                copy.courtNameId = evt.target.value;
+                setInvite(copy);
+              }}
+              id="courtName"
+              required
+              autoFocus
+              name="name"
+            >
+              {courtNames.map((courtName) => {
+                return (
+                  <option
+                    id={`courtName--${courtName.id}`}
+                    key={courtName.id}
+                    value={courtName.name}
+                  >
+                    {courtName.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="invite--courtLocation">
+            <label className="court address" htmlFor="Court Address">
+              Court Address:
+            </label>
+            <select
               onChange={(evt) => {
                 const copy = { ...newInvite };
                 copy.courtLocationId = evt.target.value;
                 setInvite(copy);
               }}
-            />
-          </section>
-          {/* <select name={courtLocation}
-                id={courtLocations}
-                onChange={
-                    (evt)=> {
-                    const copy ={...invite}
-                    copy.courtLocationId = evt.target.value
-            //         CreateInvite(copy)
-            //     }
-            // }> */}
-          {/* //     <option value={0}>Select Tennis Court Address</option>
-            //     {courtLocations.map((courtLocation)=>
-                 */}
-          {/* //     <option id={`courtLocation--${courtLocation.id}`} key={courtLocation.id} value={courtLocation.id}>
-            //         {courtLocation.address}</option>)}
-            //    </select> */}
+              id="courtLocation"
+              required
+              autoFocus
+              name="courtLocation"
+            >
+              {courtLocations.map((courtLocation) => {
+                return (
+                  <option
+                    id={`courtLocation--${courtLocation.id}`}
+                    key={courtLocation.id}
+                    value={courtLocation.id}
+                  >
+                    {courtLocation.address}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
 
           <section className="invite--comment">
             <label className="captain's comments" htmlFor="comment">
@@ -205,13 +242,6 @@ export const CreateInvite = ({ invite }) => {
             />
           </section>
 
-          <section className="timestamp">
-            <label htmlFor="time match schedule created">
-              {" "}
-              Match Posted on: {Math.floor(Date.now() / 1000)}{" "}
-            </label>
-          </section>
-
           <section className="invite--cardmodifiers">
             <button
               id="edit_button"
@@ -230,7 +260,7 @@ export const CreateInvite = ({ invite }) => {
               Delete My Invite{" "}
             </button>
           </section>
-          
+
           <button
             type="submit"
             onClick={postInvite}

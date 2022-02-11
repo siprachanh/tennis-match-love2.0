@@ -3,8 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 //import { TennisMatchLove } from "../TennisMatchLove";
 import { CreateInvite } from "./CreateInvite";
 import { InviteCard } from "./InviteCard";
-
-// import { players } from ".players/PlayerList"
 import "./Invites.css";
 
 export const InviteList = () => {
@@ -23,9 +21,7 @@ export const InviteList = () => {
   .then((res) => res.json())
   .then((invitesfromAPI) => {
     setInvites(invitesfromAPI);
-    // PlayersInvites = new variable that returns the filtered version of invitesFromAPI and sets
-    //invite.playerId equal to currentPlayerId
-    // once invoked, need to call function
+ 
   });
   
   }
